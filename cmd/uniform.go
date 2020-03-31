@@ -1,6 +1,10 @@
 package cmd
 
 import (
+	"fmt"
+	"os"
+	"strconv"
+
 	"github.com/spf13/cobra"
 	//"gitlab.com/RajaSrinivasan/random/impl/series"
 )
@@ -21,5 +25,27 @@ func init() {
 }
 
 func Uniform(cmd *cobra.Command, args []string) {
+	var minimum = 0.0
+	var maximum = 1.0
+	var err error
 
+	if len(args) >= 1 {
+		minimum, err = strconv.ParseFloat(args[0], 64)
+		if err != nil {
+			panic(err)
+		}
+		if len(args) >= 2 {
+			maximum, err = strconv.ParseFloat(args[1], 64)
+			if err != nil {
+				panic(err)
+			}
+		}
+	}
+	if maximum <= minimum {
+		fmt.Printf("Invalid Range\n")
+		os.Exit(1)
+	}
+	if verbose {
+		fmt.Printf("Uniform random variables in the range min %f max %f\n", minimum, maximum)
+	}
 }
