@@ -1,7 +1,11 @@
 package cmd
 
 import (
+	"fmt"
+	"strconv"
+
 	"github.com/spf13/cobra"
+	"gitlab.com/RajaSrinivasan/random/impl/generate"
 )
 
 var normalCmd = &cobra.Command{
@@ -21,5 +25,28 @@ func init() {
 }
 
 func Normal(cmd *cobra.Command, args []string) {
+	var mean = 0.0
+	var stdev = 1.0
+	var err error
 
+	if len(args) >= 1 {
+		mean, err = strconv.ParseFloat(args[0], 64)
+		if err != nil {
+			panic(err)
+		}
+		if len(args) >= 2 {
+			stdev, err = strconv.ParseFloat(args[1], 64)
+			if err != nil {
+				panic(err)
+			}
+		}
+	}
+
+	if Verbose {
+		fmt.Printf("Normal random variables mean %f stdev %f\n", mean, stdev)
+	}
+	series := generate.Normal(mean, stdev)
+	fmt.Printf("Number of samples %d\n", len(series))
+	series.Show()
+	series.Plot()
 }
