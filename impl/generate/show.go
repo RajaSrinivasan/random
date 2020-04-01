@@ -7,8 +7,9 @@ import (
 )
 
 func (samples SamplesType) Show() {
-	if len(Output) >= 1 {
-		outfile, err := os.Create(Output)
+	if len(Table) >= 1 {
+		fmt.Printf("Dumping values to %s\n", Table)
+		outfile, err := os.Create(Table)
 		if err != nil {
 			log.Fatalf("%s", err)
 		}

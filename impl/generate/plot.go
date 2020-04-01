@@ -26,7 +26,7 @@ func (samples SamplesType) plotHistogram() {
 	//h.Normalize(1)
 	p.Add(h)
 
-	if err := p.Save(4*vg.Inch, 4*vg.Inch, "hist.png"); err != nil {
+	if err := p.Save(4*vg.Inch, 4*vg.Inch, Output); err != nil {
 		panic(err)
 	}
 
