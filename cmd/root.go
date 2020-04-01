@@ -5,15 +5,10 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"gitlab.com/RajaSrinivasan/random/impl/generate"
 )
 
-var verbose bool
-var series bool
-var output string
-var table string
-var samples int
-var slices int
-var seed int
+var Verbose bool
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -33,13 +28,13 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.PersistentFlags().BoolVar(&verbose, "verbose", false, "be verbose")
+	rootCmd.PersistentFlags().BoolVar(&Verbose, "verbose", false, "be verbose")
 
-	rootCmd.PersistentFlags().BoolVar(&series, "series", false, "generate time series plots. default is histogram")
-	rootCmd.PersistentFlags().StringVarP(&output, "output", "o", "plot.png", "output file name")
-	rootCmd.PersistentFlags().StringVarP(&table, "table", "t", "", "tabular output filename")
-	rootCmd.PersistentFlags().IntVarP(&samples, "samples", "s", 1000, "number of samples")
-	rootCmd.PersistentFlags().IntVarP(&slices, "slices", "c", 10, "number of slices - for histograms")
-	rootCmd.PersistentFlags().IntVarP(&seed, "seed", "d", 1729, "seed for random numbers")
+	rootCmd.PersistentFlags().BoolVar(&generate.Series, "series", false, "generate time series plots. default is histogram")
+	rootCmd.PersistentFlags().StringVarP(&generate.Output, "output", "o", "plot.png", "output file name")
+	rootCmd.PersistentFlags().StringVarP(&generate.Table, "table", "t", "", "tabular output filename")
+	rootCmd.PersistentFlags().IntVarP(&generate.Samples, "samples", "s", 1000, "number of samples")
+	rootCmd.PersistentFlags().IntVarP(&generate.Slices, "slices", "c", 10, "number of slices - for histograms")
+	rootCmd.PersistentFlags().IntVarP(&generate.Seed, "seed", "d", 1729, "seed for random numbers")
 
 }

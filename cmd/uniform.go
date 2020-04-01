@@ -5,8 +5,9 @@ import (
 	"os"
 	"strconv"
 
+	"gitlab.com/RajaSrinivasan/random/impl/generate"
+
 	"github.com/spf13/cobra"
-	//"gitlab.com/RajaSrinivasan/random/impl/series"
 )
 
 var uniformCmd = &cobra.Command{
@@ -45,7 +46,11 @@ func Uniform(cmd *cobra.Command, args []string) {
 		fmt.Printf("Invalid Range\n")
 		os.Exit(1)
 	}
-	if verbose {
+	if Verbose {
 		fmt.Printf("Uniform random variables in the range min %f max %f\n", minimum, maximum)
 	}
+	series := generate.Uniform(minimum, maximum)
+	fmt.Printf("Number of samples %d\n", len(series))
+	series.Show()
+	series.Plot()
 }
