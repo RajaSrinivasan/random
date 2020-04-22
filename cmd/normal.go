@@ -45,8 +45,13 @@ func Normal(cmd *cobra.Command, args []string) {
 	if Verbose {
 		fmt.Printf("Normal random variables mean %f stdev %f\n", mean, stdev)
 	}
-	series := generate.Normal(mean, stdev)
-	fmt.Printf("Number of samples %d\n", len(series))
-	series.Show()
-	series.Plot()
+	if crypto {
+		series := generate.CryptoNormal(mean, stdev)
+		series.Show()
+		series.Plot()
+	} else {
+		series := generate.Normal(mean, stdev)
+		series.Show()
+		series.Plot()
+	}
 }
