@@ -9,6 +9,7 @@ import (
 )
 
 var Verbose bool
+var crypto bool
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -36,5 +37,6 @@ func init() {
 	rootCmd.PersistentFlags().IntVarP(&generate.Samples, "samples", "s", 1000, "number of samples")
 	rootCmd.PersistentFlags().IntVarP(&generate.Slices, "slices", "c", 10, "number of slices - for histograms")
 	rootCmd.PersistentFlags().IntVarP(&generate.Seed, "seed", "d", 1729, "seed for random numbers")
+	rootCmd.PersistentFlags().BoolVarP(&crypto, "crypto", "C", false, "use cryptographic random source ")
 
 }

@@ -49,8 +49,19 @@ func Uniform(cmd *cobra.Command, args []string) {
 	if Verbose {
 		fmt.Printf("Uniform random variables in the range min %f max %f\n", minimum, maximum)
 	}
-	series := generate.Uniform(minimum, maximum)
-	fmt.Printf("Number of samples %d\n", len(series))
-	series.Show()
-	series.Plot()
+
+	// var series generate.SamplesType
+
+	if crypto {
+		series := generate.CryptoUniform(minimum, maximum)
+		series.Show()
+		series.Plot()
+	} else {
+		series := generate.Uniform(minimum, maximum)
+		series.Show()
+		series.Plot()
+	}
+	//fmt.Printf("Number of samples %d\n", len(series))
+	//series.Show()
+	//series.Plot()
 }
