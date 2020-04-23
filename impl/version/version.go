@@ -1,12 +1,12 @@
 package version
 // Go package generator
 // File: version.h
-const buildTime = "Wed Apr 1 2020 11:19:41"
+const buildTime = "Thu Apr 23 2020 06:41:43"
 const versionMajor = 0
-const versionMinor = 0
+const versionMinor = 3
 const versionBuild = 0
 const repoURL = "git@gitlab.com:RajaSrinivasan/random.git"
 const branchName = "master"
-const shortCommitId = "98e6981"
-const longCommitId = "98e6981205ef092dd530077b47f83a70f26c7a90"
-const assignedTags = "v0.2,"
+const shortCommitId = "c6a5413"
+const longCommitId = "c6a5413e43381fbcde3c470a7af529e78eaf4040"
+const assignedTags = ""

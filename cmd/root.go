@@ -18,7 +18,7 @@ var rootCmd = &cobra.Command{
 	Long: `
 	This utility generates random numbers and plots the data as a series or as a histogram.
 	`,
-	Version: "v0.2",
+	Version: "v0.3",
 }
 
 func Execute() {
