@@ -4,34 +4,15 @@ import (
 	"math"
 )
 
-var u, v, x, y, q float64
-
-func CryptoNormalVariate(mean, stdev float64) float64 {
-	cycles := 100
-
-	for {
-		u = CryptoRandom()
-		v = 1.7156 * (CryptoRandom() - 0.5)
-		x = u - 0.449871
-		y = math.Abs(v) + 0.386595
-		q = x*x + y*(0.19600*y-0.25472*x)
-		if (q > 0.27597) && (q > 0.27846) || v*v > -4*math.Log(u)*u*u {
-			cycles = cycles - 1
-			if cycles > 0 {
-				continue
-			} else {
-				cycles = cycles - 1
-				break
-			}
-		}
-	}
-	return mean + stdev*(v/u)
-}
-
+// Boxmuller(mean,stdev) (float64,float64)
+//   generates normally distributed random variables with the mean and standard deviation
+//   provided. Two random variates are returned.
+// Reference:
+// https://en.wikipedia.org/wiki/Box–Muller_transform
 func BoxMuller(mean, stdev float64) (float64, float64) {
 	u1 := CryptoRandom()
 	u2 := CryptoRandom()
-	//fmt.Printf("%f %f\n", u1, u2)
+
 	r := math.Sqrt(-2.0 * math.Log(u1))
 
 	z1 := r * math.Cos(2*math.Pi*u2)
@@ -42,9 +23,14 @@ func BoxMuller(mean, stdev float64) (float64, float64) {
 func CryptoNormal(mean, stdev float64) (samples SamplesType) {
 	samples = make(SamplesType, Samples)
 
-	for idx, _ := range samples {
+	for idx := 0; idx < Samples/2; idx = idx + 1 {
+		x1, x2 := BoxMuller(mean, stdev)
+		samples[idx*2] = x1
+		samples[idx*2+1] = x2
+	}
+	if Samples%2 != 0 {
 		x1, _ := BoxMuller(mean, stdev)
-		samples[idx] = x1
+		samples[Samples-1] = x1
 	}
 	return samples
 }
